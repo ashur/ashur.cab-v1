@@ -10,13 +10,13 @@ At each milestone, wrong turn, or other notable decision, I'll update [this arti
 
 ## Structure
 
-Original content will live in a `src` directory at the root of this repository:
+Original content lives in a `src` directory at the root of this repository:
 
 ```
 └── src/
 ```
 
-When the site is built, all contents will be generated a `dist` directory also at the root of this repository:
+When the site is built, all contents are generated a `dist` directory also at the root of this repository:
 
 ```
 └── dist/
@@ -24,7 +24,7 @@ When the site is built, all contents will be generated a `dist` directory also a
 
 ### Articles
 
-Articles will consist of Markdown files which live in a bifurcated directory `src/articles`:
+Articles consist of Markdown files which live in a bifurcated directory `src/articles`:
 
 ```
 └── src/
@@ -33,13 +33,13 @@ Articles will consist of Markdown files which live in a bifurcated directory `sr
         └── published/
 ```
 
-When the site is built, all `.md` files in `articles/published` will be extruded\* into static HTML files:
+When the site is built, all `.md` files in `articles/published` are copied verbatim into the same relative location inside `dist/articles/`:
 
 ```
 ├── dist/
 │   └── articles/
 │       └── 2018/
-│           └── hello-world.html
+│           └── hello-world.md
 │
 └── src/
     └── articles/
@@ -53,6 +53,22 @@ When the site is built, all `.md` files in `articles/published` will be extruded
 > 🙈 Files in `articles/drafts` will always be ignored
 
 
+## Building
+
+> 🥤 Builds are handled by [Gulp][gulp] tasks. For example:
+>
+> ```
+> $ gulp build:dev
+> ```
+
+The entire site can be built using `build:dev` or `build:dist`, depending on need.
+
+### Articles
+
+Articles can be built independently using the `articles:build` task.
+
+
 <!-- Links  -->
+[gulp]: https://gulpjs.org
 [hello-world]: https://ashur.cab/rera/articles/2018/hello-world.html
 [repo]: https://github.com/ashur/ashur.cab
