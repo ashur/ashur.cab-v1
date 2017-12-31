@@ -1,0 +1,14 @@
+{
+  "name": "ashur.cab",
+  "version": "0.1.0",
+  "description": "ashur.cab/rera",
+  "dependencies": {
+    "gulp": "^3.9.1"
+  },
+  "devDependencies": {},
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ashur/ashur.cab.git"
+  }
+}
