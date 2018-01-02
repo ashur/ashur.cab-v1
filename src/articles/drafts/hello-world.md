@@ -16,11 +16,13 @@ Original content lives in a `src` directory at the root of this repository:
 └── src/
 ```
 
-When the site is built, all contents are generated a `dist` directory also at the root of this repository:
+When the site is [built](#building), all contents are generated in a sibling directory `dist`:
 
 ```
 └── dist/
 ```
+
+> 🙈 `dist` is [ignored][gh-.gitignore] to prevent all generated contents from being added to the repository's history
 
 ### Articles
 
@@ -110,6 +112,7 @@ Articles can be built independently using the `articles:build` task.
 
 
 <!-- Links  -->
+[gh-.gitignore]: https://github.com/ashur/ashur.cab/blob/master/.gitignore
 [gh-article.hbs]: https://github.com/ashur/ashur.cab/blob/master/src/templates/partials/article.hbs
 [gulp]: https://gulpjs.com
 [gulp-frontmatter]: https://www.npmjs.com/package/gulp-front-matter
