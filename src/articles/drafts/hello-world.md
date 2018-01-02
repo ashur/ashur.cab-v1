@@ -110,7 +110,7 @@ Articles can be built independently using the `articles:build` task.
 
 
 <!-- Links  -->
-[gh-article.hbs]: https://github.com/ashur/ashur.cab/blob/master/src/templates/partials.article.hbs
+[gh-article.hbs]: https://github.com/ashur/ashur.cab/blob/master/src/templates/partials/article.hbs
 [gulp]: https://gulpjs.com
 [gulp-frontmatter]: https://www.npmjs.com/package/gulp-front-matter
 [gulp-markdown]: https://www.npmjs.com/package/gulp-markdown
