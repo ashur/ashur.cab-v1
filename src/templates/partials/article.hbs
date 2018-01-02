@@ -1,0 +1,7 @@
+{{#extend "base"}}
+	{{#content "body" mode="replace"}}
+		<h1>{{ metadata.title }}</h1>
+		<h2>{{ metadata.date }}</h2>
+		{{{ contents }}}
+	{{/content}}
+{{/extend}}

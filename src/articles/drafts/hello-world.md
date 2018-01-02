@@ -33,13 +33,51 @@ Articles consist of Markdown files which live in a bifurcated directory `src/art
         └── published/
 ```
 
-When the site is built, all `.md` files in `articles/published` are copied verbatim into the same relative location inside `dist/articles/`:
+When articles are built, each `.md` file in `articles/published` is processed as follows.
+
+[Frontmatter][gulp-frontmatter] is stripped from the file contents and added to a file object available to Gulp tasks:
+
+```javascript
+.pipe( frontmatter( { property: 'metadata', remove: true } ) )
+```
+
+The remaining contents of the file (i.e., the article contents) are [converted from Markdown][gulp-markdown] to HTML (with a dash of smartquote conversion for good measure):
+
+```javascript
+.pipe( markdown( { smartypants: true } ) )
+```
+
+The resulting HTML and article metadata are passed into a single [Handlebars][handlebars] template [article.hbs][gh-article.hbs], and the file's contents are updated accordingly:
+
+```javascript
+.pipe( tap( function( file )
+{
+    var article = {};
+    article.contents = file.contents.toString();
+    article.metadata = file.metadata;
+
+    var source = fs.readFileSync( `${paths.templates.partials}/article.hbs`, 'utf8' );
+    var template = wax.compile( source );
+    var rendered = template( article );
+
+    file.contents = Buffer.from( rendered );
+
+} ) )
+```
+
+The file extension is changed from `.md` to `.html`
+
+```javascript
+.pipe( rename( { extname: '.html' } ) )
+```
+
+Finally, the transformed file is copied into the same relative location inside `dist/articles/`:
 
 ```
 ├── dist/
 │   └── articles/
 │       └── 2018/
-│           └── hello-world.md
+│           └── hello-world.html
 │
 └── src/
     └── articles/
@@ -69,6 +107,10 @@ Articles can be built independently using the `articles:build` task.
 
 
 <!-- Links  -->
-[gulp]: https://gulpjs.org
+[gh-article.hbs]: https://github.com/ashur/ashur.cab/blob/master/src/templates/partials.article.hbs
+[gulp]: https://gulpjs.com
+[gulp-frontmatter]: https://www.npmjs.com/package/gulp-front-matter
+[gulp-markdown]: https://www.npmjs.com/package/gulp-markdown
+[handlebars]: http://handlebarsjs.com
 [hello-world]: https://ashur.cab/rera/articles/2018/hello-world.html
 [repo]: https://github.com/ashur/ashur.cab
