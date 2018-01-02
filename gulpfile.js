@@ -1,5 +1,6 @@
 const fs = require( 'fs' );
 const gulp = require( 'gulp' );
+const rm = require( 'gulp-rm' )
 const tap = require( 'gulp-tap' );
 
 var paths =
@@ -59,4 +60,15 @@ gulp.task( 'articles:build', function()
 
 /* Builds */
 gulp.task( 'build:dev', ['articles:build'] );
-gulp.task( 'build:dist', ['articles:build'] );
+gulp.task( 'build:dist', ['cleanup:all','articles:build'] );
+
+
+/* Cleanup */
+gulp.task( 'cleanup:all', ['cleanup:articles'] );
+
+gulp.task( 'cleanup:articles', function()
+{
+	return gulp
+		.src( `${paths.articles.dest}/**/*`, { read: false } )
+		.pipe( rm() );
+});

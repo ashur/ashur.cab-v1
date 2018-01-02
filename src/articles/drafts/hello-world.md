@@ -101,6 +101,9 @@ Finally, the transformed file is copied into the same relative location inside `
 
 The entire site can be built using `build:dev` or `build:dist`, depending on need.
 
+When building for `dist`, the `cleanup:all` task is run automatically to ensure that the contents of `dist/` are pristine.
+
+
 ### Articles
 
 Articles can be built independently using the `articles:build` task.
