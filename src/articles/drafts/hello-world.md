@@ -110,6 +110,8 @@ When building for `dist`, the `cleanup:all` task is run automatically to ensure 
 
 Articles can be built independently using the `articles:build` task.
 
+> 📝 Article drafts can be built with `drafts:build`
+
 
 <!-- Links  -->
 [gh-.gitignore]: https://github.com/ashur/ashur.cab/blob/master/.gitignore

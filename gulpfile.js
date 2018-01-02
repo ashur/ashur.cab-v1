@@ -10,6 +10,11 @@ var paths =
 		dest: "dist/articles"
 	},
 
+	drafts: {
+		src: "src/articles/drafts",
+		dest: "dist/drafts"
+	},
+
 	templates: {
 		pages: "src/templates/pages",
 		partials: "src/templates/partials",
@@ -18,7 +23,7 @@ var paths =
 
 
 /* Articles */
-gulp.task( 'articles:build', function()
+var compileArticles = function( src, dest )
 {
 	const frontmatter = require( 'gulp-front-matter' );
 	const handlebars = require( 'handlebars' );
@@ -32,7 +37,7 @@ gulp.task( 'articles:build', function()
 		.helpers( layouts );
 
 	return gulp
-		.src( `${paths.articles.src}/**/*.md` )
+		.src( src )
 
 		.pipe( frontmatter( { property: 'metadata', remove: true } ) )
 
@@ -54,8 +59,18 @@ gulp.task( 'articles:build', function()
 
 		.pipe( rename( { extname: '.html' } ) )
 
-		.pipe( gulp.dest( `${paths.articles.dest}` ) );
+		.pipe( gulp.dest( dest ) );
+};
+
+gulp.task( 'articles:build', function()
+{
+	return compileArticles( `${paths.articles.src}/**/*.md`, paths.articles.dest );
 });
+
+gulp.task( 'drafts:build', function()
+{
+	return compileArticles( `${paths.drafts.src}/**/*.md`, paths.drafts.dest );
+} );
 
 
 /* Builds */
