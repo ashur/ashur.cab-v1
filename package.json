@@ -11,7 +11,8 @@
     "gulp-tap": "^1.0.1",
     "handlebars": "^4.0.11",
     "handlebars-layouts": "^3.1.4",
-    "handlebars-wax": "^6.1.0"
+    "handlebars-wax": "^6.1.0",
+    "js-yaml": "^3.10.0"
   },
   "devDependencies": {},
   "license": "MIT",
