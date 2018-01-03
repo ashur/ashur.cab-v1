@@ -79,15 +79,34 @@ gulp.task( 'drafts:build', function()
 
 /* Builds */
 gulp.task( 'build:dev', ['articles:build'] );
-gulp.task( 'build:dist', ['cleanup:all','articles:build'] );
+gulp.task( 'build:dist', ['clean:all','articles:build'] );
 
 
 /* Cleanup */
-gulp.task( 'cleanup:all', ['cleanup:articles'] );
-
-gulp.task( 'cleanup:articles', function()
+var clean = function( target )
 {
 	return gulp
-		.src( `${paths.articles.dest}/**/*`, { read: false } )
-		.pipe( rm() );
+		.src( `${target}/**/*`, { read: false } )
+		.pipe( rm() )
+		.on( 'end', function()
+		{
+			return gulp
+				.src( target, { read: false } )
+				.pipe( rm() );
+		});
+};
+
+gulp.task( 'clean:all', function()
+{
+	return clean( 'dist' );
+});
+
+gulp.task( 'clean:articles', function()
+{
+	return clean( paths.articles.dest );
+});
+
+gulp.task( 'clean:drafts', function()
+{
+	return clean( paths.drafts.dest );
 });
