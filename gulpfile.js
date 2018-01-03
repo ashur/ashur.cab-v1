@@ -2,12 +2,16 @@ const fs = require( 'fs' );
 const gulp = require( 'gulp' );
 const rm = require( 'gulp-rm' )
 const tap = require( 'gulp-tap' );
+const yaml = require( 'js-yaml' );
+
+/* Config */
+var config = yaml.safeLoad( fs.readFileSync( 'config.yml', 'utf8' ) );
 
 var paths =
 {
 	articles: {
 		src: "src/articles/published",
-		dest: "dist/articles"
+		dest: `dist/${config.articles.path}`
 	},
 
 	drafts: {
