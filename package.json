@@ -8,6 +8,7 @@
     "gulp-markdown": "^2.0.1",
     "gulp-rename": "^1.2.2",
     "gulp-rm": "^1.0.4",
+    "gulp-s3": "^0.11.0",
     "gulp-tap": "^1.0.1",
     "handlebars": "^4.0.11",
     "handlebars-layouts": "^3.1.4",
