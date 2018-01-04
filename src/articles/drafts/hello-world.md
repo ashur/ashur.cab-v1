@@ -125,6 +125,9 @@ $ gulp deploy
 
 which automatically runs the `build:dist` task before uploading the contents of `dist`.
 
+> 🌤 Optionally, deployment can be followed by CloudFront invalidation with the `deploy:invalidate` task
+
+
 <!-- Links  -->
 [gh-.gitignore]: https://github.com/ashur/ashur.cab/blob/master/.gitignore
 [gh-article.hbs]: https://github.com/ashur/ashur.cab/blob/master/src/templates/partials/article.hbs

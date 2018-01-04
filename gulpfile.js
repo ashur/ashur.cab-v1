@@ -92,15 +92,15 @@ gulp.task( 'build:dist', ['clean:all','articles:build'] );
 
 
 /* Deploy */
-gulp.task( 'deploy', ['build:dist'], function()
+var uploadDist = function()
 {
 	const s3 = require( 'gulp-s3' );
 
 	var aws = {
-		"bucket": config.s3.bucket,
-		"region": config.s3.region,
-		"key": process.env.ASHCAB_AWS_KEY,
-		"secret": process.env.ASHCAB_AWS_SECRET,
+		bucket: config.s3.bucket,
+		region: config.s3.region,
+		key: process.env.ASHCAB_AWS_KEY,
+		secret: process.env.ASHCAB_AWS_SECRET,
 	};
 
 	var options = {
@@ -111,6 +111,30 @@ gulp.task( 'deploy', ['build:dist'], function()
 	return gulp
 		.src( 'dist/**/*' )
 		.pipe( s3( aws, options ) );
+};
+
+gulp.task( 'deploy', ['build:dist'], function()
+{
+	return uploadDist();
+} );
+
+gulp.task( 'deploy:invalidate', ['build:dist'], function()
+{
+	return uploadDist()
+		.on( 'end', function()
+		{
+			const Void = require( 'void' );
+
+			var cloudfront = {
+				accessKeyId: process.env.ASHCAB_AWS_KEY,
+				secretAccessKey: process.env.ASHCAB_AWS_SECRET,
+				distribution: process.env.ASHCAB_AWS_DISTRIBUTION_ID,
+				checkDelay: 1,
+				paths: [ `/${paths.s3.dest}/*` ],
+			};
+
+			var v = new Void( cloudfront );
+		} );
 } );
 
 
