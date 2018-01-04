@@ -147,11 +147,37 @@ gulp.task( 'deploy:invalidate', ['build:dist'], function()
 } );
 
 
+/* Pages */
+gulp.task( 'pages:build', function()
+{
+	const hb = require( 'gulp-hb' );
+	const layouts = require( 'handlebars-layouts' );
+	const rename = require( 'gulp-rename' );
+
+	var context =
+	{
+		site: config.site
+	};
+
+	var hbStream = hb()
+		.partials( `${paths.templates.partials}/**/*.hbs` )
+		.helpers( layouts )
+		.data( context );
+
+	return gulp
+		.src( `${paths.templates.pages}/**/*.hbs` )
+		.pipe( hbStream )
+		.pipe( rename( { extname: '.html' } ) )
+		.pipe( gulp.dest( 'dist' ) );
+});
+
+
 /* Watch */
 gulp.task( 'watch', function()
 {
-	gulp.watch( [`${paths.articles.src}/**/*.md`, `${paths.templates.pages}/**/*.hbs`, `${paths.templates.partials}/**/*.hbs`], ['articles:build'] );
-	gulp.watch( [`${paths.drafts.src}/**/*.md`,   `${paths.templates.pages}/**/*.hbs`, `${paths.templates.partials}/**/*.hbs`], ['drafts:build'] );
+	gulp.watch( [`${paths.articles.src}/**/*.md`, `${paths.templates.partials}/**/*.hbs`], ['articles:build'] );
+	gulp.watch( [`${paths.drafts.src}/**/*.md`, `${paths.templates.partials}/**/*.hbs`], ['drafts:build'] );
+	gulp.watch( [`${paths.templates.pages}/**/*.hbs`, `${paths.templates.partials}/**/*.hbs`], ['pages:build'] );
 } );
 
 
