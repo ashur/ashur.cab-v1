@@ -14,7 +14,8 @@
     "handlebars": "^4.0.11",
     "handlebars-layouts": "^3.1.4",
     "handlebars-wax": "^6.1.0",
-    "js-yaml": "^3.10.0"
+    "js-yaml": "^3.10.0",
+    "void": "^1.0.2"
   },
   "devDependencies": {},
   "license": "MIT",
