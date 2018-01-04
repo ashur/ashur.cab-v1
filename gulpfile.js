@@ -54,23 +54,28 @@ var compileArticles = function( src, dest )
 
 		.pipe( tap( function( file )
 		{
-			var article = {};
-			article.contents = file.contents.toString();
-			article.metadata = file.metadata;
+			/* Template context */
+			var context =
+			{
+				article: {},
+				site: config.site
+			};
 
-			if( article.metadata.date )
+			context.article.contents = file.contents.toString();
+			context.article.metadata = file.metadata;
+
+			if( context.article.metadata.date )
 			{
 				/* Adjust for local timezone offset */
-				article.metadata.date.setMinutes( article.metadata.date.getTimezoneOffset() );
+				context.article.metadata.date.setMinutes( context.article.metadata.date.getTimezoneOffset() );
 
-				article.metadata.date = dateFormat( article.metadata.date, config.articles.date_format );
+				context.article.metadata.date = dateFormat( context.article.metadata.date, config.articles.date_format );
 			}
 
 			var source = fs.readFileSync( `${paths.templates.partials}/article.hbs`, 'utf8' );
 			var template = wax.compile( source );
-			var rendered = template( article );
 
-			file.contents = Buffer.from( rendered );
+			file.contents = Buffer.from( template( context ) );
 
 		} ) )
 
