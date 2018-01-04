@@ -19,6 +19,10 @@ var paths =
 		dest: "dist/drafts"
 	},
 
+	s3: {
+		dest: config.s3.path
+	},
+
 	templates: {
 		pages: "src/templates/pages",
 		partials: "src/templates/partials",
@@ -80,6 +84,29 @@ gulp.task( 'drafts:build', function()
 /* Builds */
 gulp.task( 'build:dev', ['articles:build'] );
 gulp.task( 'build:dist', ['clean:all','articles:build'] );
+
+
+/* Deploy */
+gulp.task( 'deploy', ['build:dist'], function()
+{
+	const s3 = require( 'gulp-s3' );
+
+	var aws = {
+		"bucket": config.s3.bucket,
+		"region": config.s3.region,
+		"key": process.env.ASHCAB_AWS_KEY,
+		"secret": process.env.ASHCAB_AWS_SECRET,
+	};
+
+	var options = {
+		uploadPath: `${paths.s3.dest}/`,
+		failOnError: true
+	};
+
+	return gulp
+		.src( 'dist/**/*' )
+		.pipe( s3( aws, options ) );
+} );
 
 
 /* Cleanup */

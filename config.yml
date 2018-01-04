@@ -5,3 +5,7 @@ site:
 articles:
     path: articles
 
+s3:
+    bucket: ashur.cab
+    region: us-east-1
+    path: rera

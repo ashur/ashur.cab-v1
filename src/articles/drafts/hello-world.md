@@ -113,12 +113,26 @@ Articles can be built independently using the `articles:build` task.
 > 📝 Article drafts can be built with `drafts:build`
 
 
+## Deployment
+
+The site is hosted in an S3 bucket configured for [static website hosting][s3-static]. Details about the bucket are defined in [config.yml][gh-config.yml].
+
+Deploying to S3 is handled by the `deploy` task:
+
+```
+$ gulp deploy
+```
+
+which automatically runs the `build:dist` task before uploading the contents of `dist`.
+
 <!-- Links  -->
 [gh-.gitignore]: https://github.com/ashur/ashur.cab/blob/master/.gitignore
 [gh-article.hbs]: https://github.com/ashur/ashur.cab/blob/master/src/templates/partials/article.hbs
+[gh-config.yml]: https://github.com/ashur/ashur.cab/blob/master/config.yml
 [gulp]: https://gulpjs.com
 [gulp-frontmatter]: https://www.npmjs.com/package/gulp-front-matter
 [gulp-markdown]: https://www.npmjs.com/package/gulp-markdown
 [handlebars]: http://handlebarsjs.com
 [hello-world]: https://ashur.cab/rera/articles/2018/hello-world.html
 [repo]: https://github.com/ashur/ashur.cab
+[s3-static]: https://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteHosting.html
