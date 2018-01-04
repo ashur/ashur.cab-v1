@@ -4,6 +4,7 @@ site:
 
 articles:
     path: articles
+    date_format: mmmm d, yyyy
 
 s3:
     bucket: ashur.cab

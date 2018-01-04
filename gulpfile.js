@@ -33,6 +33,7 @@ var paths =
 /* Articles */
 var compileArticles = function( src, dest )
 {
+	const dateFormat = require( 'dateFormat' );
 	const frontmatter = require( 'gulp-front-matter' );
 	const handlebars = require( 'handlebars' );
 	const layouts = require( 'handlebars-layouts' );
@@ -56,6 +57,10 @@ var compileArticles = function( src, dest )
 			var article = {};
 			article.contents = file.contents.toString();
 			article.metadata = file.metadata;
+			if( article.metadata.date )
+			{
+				article.metadata.date = dateFormat( article.metadata.date, config.articles.date_format );
+			}
 
 			var source = fs.readFileSync( `${paths.templates.partials}/article.hbs`, 'utf8' );
 			var template = wax.compile( source );
