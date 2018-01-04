@@ -57,8 +57,12 @@ var compileArticles = function( src, dest )
 			var article = {};
 			article.contents = file.contents.toString();
 			article.metadata = file.metadata;
+
 			if( article.metadata.date )
 			{
+				/* Adjust for local timezone offset */
+				article.metadata.date.setMinutes( article.metadata.date.getTimezoneOffset() );
+
 				article.metadata.date = dateFormat( article.metadata.date, config.articles.date_format );
 			}
 
