@@ -96,8 +96,8 @@ gulp.task( 'drafts:build', function()
 
 
 /* Builds */
-gulp.task( 'build:dev', ['articles:build'] );
-gulp.task( 'build:dist', ['clean:all','articles:build'] );
+gulp.task( 'build:dev', ['articles:build','pages:build'] );
+gulp.task( 'build:dist', ['clean:all','articles:build','pages:build'] );
 
 
 /* Deploy */
