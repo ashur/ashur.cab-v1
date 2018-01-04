@@ -1,6 +1,6 @@
 ---
 title: Hello, world.
-date: TBD
+date: 2018-01-03
 ---
 
 This is the beginning of a new repository, [ashur.cab][repo]. With enough gum, paperclips and dumb luck, it will eventually serve as the source for the site https://ashur.cab/rera
