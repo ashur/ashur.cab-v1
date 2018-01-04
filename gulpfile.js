@@ -147,6 +147,14 @@ gulp.task( 'deploy:invalidate', ['build:dist'], function()
 } );
 
 
+/* Watch */
+gulp.task( 'watch', function()
+{
+	gulp.watch( [`${paths.articles.src}/**/*.md`, `${paths.templates.pages}/**/*.hbs`, `${paths.templates.partials}/**/*.hbs`], ['articles:build'] );
+	gulp.watch( [`${paths.drafts.src}/**/*.md`,   `${paths.templates.pages}/**/*.hbs`, `${paths.templates.partials}/**/*.hbs`], ['drafts:build'] );
+} );
+
+
 /* Cleanup */
 var clean = function( target )
 {
