@@ -12,7 +12,7 @@
     "gulp-rm": "^1.0.4",
     "gulp-s3": "^0.11.0",
     "gulp-tap": "^1.0.1",
-    "handlebars": "^4.3.0",
+    "handlebars": "^4.7.7",
     "handlebars-layouts": "^3.1.4",
     "handlebars-wax": "^6.1.0",
     "js-yaml": "^3.10.0",
